@@ -6,5 +6,5 @@ setup(name='AFCon',
       author='Ricky Cook',
       author_email='mail@thatpanda.com',
       url='https://github.com/RickyCook/afcon',
-	  install_requires=['flask==0.10.1'],
+      install_requires=['Flask==0.10.1', 'MarkupSafe'],
       )
