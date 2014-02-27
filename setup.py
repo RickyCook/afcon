@@ -1,10 +1,10 @@
 from setuptools import setup
 
-setup(name='YourAppName',
-      version='1.0',
-      description='OpenShift App',
-      author='Your Name',
-      author_email='example@example.com',
-      url='http://www.python.org/sigs/distutils-sig/',
-#      install_requires=['Django>=1.3'],
-     )
+setup(name='AFCon',
+      version='0.1',
+      description='',
+      author='Ricky Cook',
+      author_email='mail@thatpanda.com',
+      url='https://github.com/RickyCook/afcon',
+	  install_requires=['flask==0.10.1'],
+      )
