@@ -11,7 +11,6 @@ gear_uuid = getattr(os.environ, 'OPENSHIFT_GEAR_UUID', None)
 def hello():
     return "Hello World!"
 
-@app.route('/env')
 def env():
     exclude_re = r'OPENSHIFT|PASSWORD|^PG'
 
@@ -31,5 +30,6 @@ def env():
     )
 
 if __name__ == "__main__":
+    app.route('/env')(env)
     app.run()
 
