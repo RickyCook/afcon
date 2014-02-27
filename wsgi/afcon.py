@@ -1,11 +1,21 @@
 import flask
+import logging
 import os
 import re
 
 from flask import Flask, Response
 
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+)
+LOGGER = logging.getLogger()
+
 app = Flask(__name__)
 gear_uuid = getattr(os.environ, 'OPENSHIFT_GEAR_UUID', None)
+
+if gear_uuid:
+    print("Running on OpenShift")
 
 @app.route("/")
 def hello():
