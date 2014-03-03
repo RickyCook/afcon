@@ -1,4 +1,5 @@
 import logging
+import os
 
 GEAR_UUID = getattr(os.environ, 'OPENSHIFT_GEAR_UUID', None)
 IS_OPENSHIFT = GEAR_UUID is not None
