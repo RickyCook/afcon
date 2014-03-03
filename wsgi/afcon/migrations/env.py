@@ -2,7 +2,6 @@ from __future__ import with_statement
 from alembic import context
 
 from afcon.settings import DB_CONNECTION
-from afcon.db import engine
 
 # add your model's MetaData object here
 # for 'autogenerate' support
@@ -39,8 +38,9 @@ def run_migrations_online():
     and associate a connection with the context.
 
     """
+    from afcon import db
 
-    connection = engine.connect()
+    connection = db.engine.connect()
     context.configure(
                 connection=connection,
                 target_metadata=target_metadata
