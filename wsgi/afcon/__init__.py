@@ -5,16 +5,14 @@ import re
 
 from flask import Flask, Response
 
-logging.basicConfig(
-    level=logging.DEBUG,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-)
+from afcon import settings
+
+logging.basicConfig(**settings.LOGGING_CONFIG)
 LOGGER = logging.getLogger()
 
 app = Flask(__name__)
-gear_uuid = getattr(os.environ, 'OPENSHIFT_GEAR_UUID', None)
 
-if gear_uuid:
+if settings.GEAR_UUID:
     logger.info('Running on OpenShift')
 
 @app.route("/")
@@ -30,7 +28,9 @@ def env():
         in flask.request.environ.items()
         if not (
             re.search(exclude_re, key) or
-            (gear_uuid and re.search(gear_uuid, value))
+            (settings.GEAR_UUID and re.search(
+                settings.GEAR_UUID, value
+            ))
         )
     ]
 
