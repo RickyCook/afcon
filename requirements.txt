@@ -1,6 +1,6 @@
-AFCon==0.1
 Flask==0.10.1
 Flask-RESTful==0.2.11
+Flask-SQLAlchemy==1.0
 Jinja2==2.7.2
 Mako==0.9.1
 MarkupSafe==0.18
