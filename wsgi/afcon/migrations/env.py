@@ -1,13 +1,26 @@
 from __future__ import with_statement
 from alembic import context
+from sqlalchemy import engine_from_config, pool
+from logging.config import fileConfig
+
+import afcon.models
 
 from afcon.settings import DB_CONNECTION
+from afcon.db import db
+
+# this is the Alembic Config object, which provides
+# access to the values within the .ini file in use.
+config = context.config
+
+# Interpret the config file for Python logging.
+# This line sets up loggers basically.
+fileConfig(config.config_file_name)
 
 # add your model's MetaData object here
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = None
+target_metadata = db.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -38,9 +51,14 @@ def run_migrations_online():
     and associate a connection with the context.
 
     """
-    from afcon import db
+    alembic_config = config.get_section(config.config_ini_section)
+    alembic_config['sqlalchemy.url'] = DB_CONNECTION
+    engine = engine_from_config(
+                alembic_config,
+                prefix='sqlalchemy.',
+                poolclass=pool.NullPool)
 
-    connection = db.engine.connect()
+    connection = engine.connect()
     context.configure(
                 connection=connection,
                 target_metadata=target_metadata
