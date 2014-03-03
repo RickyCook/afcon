@@ -15,7 +15,7 @@ app = Flask(__name__)
 gear_uuid = getattr(os.environ, 'OPENSHIFT_GEAR_UUID', None)
 
 if gear_uuid:
-    print("Running on OpenShift")
+    logger.info('Running on OpenShift')
 
 @app.route("/")
 def hello():
