@@ -15,7 +15,7 @@ app = Flask(__name__)
 if settings.GEAR_UUID:
     logger.info('Running on OpenShift')
 
-@app.route("/")
+@app.route('/')
 def hello():
     return "Hello World!"
 
@@ -36,10 +36,10 @@ def env():
 
     return Response(
         "\n".join(lines),
-        content_type="text/plain;charset=UTF-8"
+        content_type='text/plain;charset=UTF-8'
     )
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.route('/env')(env)
     app.run()
 
