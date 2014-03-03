@@ -5,4 +5,5 @@
 # ruby, etc.
 APP_ROOT="$OPENSHIFT_REPO_DIR/wsgi/afcon"
 export PYTHONPATH="$PYTHONPATH:$APP_ROOT"
-alembic -c "$APP_ROOT/alembic.ini" upgrade head
+cd "$APP_ROOT"
+alembic upgrade head
