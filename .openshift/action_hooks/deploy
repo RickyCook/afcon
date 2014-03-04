@@ -3,7 +3,5 @@
 # build hook has been run but before the application has been started back
 # up again.  This script gets executed directly, so it could be python, php,
 # ruby, etc.
-APP_ROOT="$OPENSHIFT_REPO_DIR/wsgi/afcon"
-export PYTHONPATH="$PYTHONPATH:$APP_ROOT"
-cd "$APP_ROOT"
-alembic upgrade head
+APPROOT="$OPENSHIFT_REPO_DIR/wsgi"
+(cd "$APPROOT" && python -m afcon db upgrade head)

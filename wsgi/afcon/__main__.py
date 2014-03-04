@@ -3,7 +3,7 @@ import re
 
 from flask import Response
 
-from afcon import app
+from afcon.core import app, manager
 from afcon.settings import GEAR_UUID
 
 def env():
@@ -27,4 +27,5 @@ def env():
     )
 
 app.route('/env')(env)
-app.run()
+
+manager.run()

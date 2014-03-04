@@ -3,11 +3,6 @@ from alembic import context
 from sqlalchemy import engine_from_config, pool
 from logging.config import fileConfig
 
-import afcon.models
-
-from afcon.settings import DB_CONNECTION
-from afcon.db import db
-
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
@@ -20,7 +15,12 @@ fileConfig(config.config_file_name)
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = db.metadata
+from flask import current_app
+config.set_main_option('sqlalchemy.url', current_app.config.get('SQLALCHEMY_DATABASE_URI'))
+target_metadata = current_app.extensions['migrate'].db.metadata
+
+# Load the models
+from afcon import models
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -39,7 +39,8 @@ def run_migrations_offline():
     script output.
 
     """
-    context.configure(url=DB_CONNECTION)
+    url = config.get_main_option("sqlalchemy.url")
+    context.configure(url=url)
 
     with context.begin_transaction():
         context.run_migrations()
@@ -51,10 +52,8 @@ def run_migrations_online():
     and associate a connection with the context.
 
     """
-    alembic_config = config.get_section(config.config_ini_section)
-    alembic_config['sqlalchemy.url'] = DB_CONNECTION
     engine = engine_from_config(
-                alembic_config,
+                config.get_section(config.config_ini_section),
                 prefix='sqlalchemy.',
                 poolclass=pool.NullPool)
 
