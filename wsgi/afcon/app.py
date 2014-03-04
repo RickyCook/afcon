@@ -12,5 +12,5 @@ if settings.GEAR_UUID:
 
 
 @app.route('/')
-def hello():
-    return "Hello World!"
+def dragons():
+    return "Here be dragons! (and an API)"
