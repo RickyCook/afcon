@@ -3,6 +3,7 @@ import re
 
 from flask import Response
 
+from afcon import routes
 from afcon.core import app, manager
 from afcon.settings import GEAR_UUID
 

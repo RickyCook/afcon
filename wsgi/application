@@ -18,6 +18,5 @@ try:
 except IOError:
     pass
 
-from afcon import app as afcon_app_module  # routes and init
+from afcon import routes
 from afcon.core import app as application
-
