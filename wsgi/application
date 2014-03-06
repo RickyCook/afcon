@@ -9,14 +9,13 @@ PY_DIR = os.path.join(os.environ['OPENSHIFT_HOMEDIR'], "python")
 virtenv = PY_DIR + '/virtenv/'
 
 PY_CACHE = os.path.join(virtenv, 'lib', '3.3', 'site-packages')
-
 os.environ['PYTHON_EGG_CACHE'] = os.path.join(PY_CACHE)
+
 virtualenv = os.path.join(virtenv, 'bin/activate_this.py')
 
 try:
-    exec(compile(open(virtualenv).read(), virtualenv, 'exec'), dict(__file__=virtualenv))
+    execfile(virtualenv, dict(__file__=virtualenv))
 except IOError:
     pass
 
-from afcon import routes
-from afcon.core import app as application
+from afcon import app as application

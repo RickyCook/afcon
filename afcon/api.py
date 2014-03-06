@@ -1,8 +1,8 @@
 from flask.ext.restful import abort, fields, marshal_with, Resource
 from sqlalchemy.orm.exc import NoResultFound
 
+from afcon import api
 from afcon.models import User
-from afcon.core import api
 
 
 class Users(Resource):

@@ -1,6 +1,4 @@
-from flask.ext.sqlalchemy import SQLAlchemy
-
-from afcon.core import db
+from afcon import db
 
 
 class User(db.Model):
