@@ -6,7 +6,7 @@ PROJECT_ROOT = os.environ.get('OPENSHIFT_REPO_DIR',
                               os.path.dirname(os.path.abspath(__file__)))
 
 with open(os.path.join(PROJECT_ROOT, 'requirements.txt')) as file_:
-    requirements = [req.strip() for req in file_.xreadlines()]
+    requirements = [req.strip() for req in file_]
 
 setup(
     name='AFCon',
