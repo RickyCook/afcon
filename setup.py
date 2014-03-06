@@ -2,7 +2,11 @@ import os
 
 from setuptools import setup
 
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.environ.get('OPENSHIFT_REPO_DIR',
+                              os.path.dirname(os.path.abspath(__file__)))
+
+with open(os.path.join(PROJECT_ROOT, 'requirements.txt')) as file_:
+    requirements = [req.strip() for req in file_.xreadlines()]
 
 setup(
     name='AFCon',
@@ -11,9 +15,5 @@ setup(
     author='Ricky Cook',
     author_email='mail@thatpanda.com',
     url='https://github.com/RickyCook/afcon',
-    install_requires=open(
-        '%s/requirements.txt' % (
-            os.environ.get('OPENSHIFT_REPO_DIR', PROJECT_ROOT)
-        )
-    ).readlines(),
+    install_requires=requirements,
  )
