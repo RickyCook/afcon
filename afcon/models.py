@@ -4,6 +4,9 @@ from afcon import db
 
 
 class User(db.Model):
+    """
+    Basic user model
+    """
     id = db.Column(db.Integer, primary_key=True)
 
     email = db.Column(db.String(254), nullable=False)
