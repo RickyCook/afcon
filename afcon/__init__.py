@@ -9,6 +9,7 @@ app = Flask(__name__)
 
 app.secret_key = os.environ.get('OPENSHIFT_SECRET_TOKEN',
                                 'THIS IS REALLY SECRET')
+app.config['WTF_CSRF_ENABLED'] = False  # Bad for API
 app.config['SQLALCHEMY_DATABASE_URI'] = \
     os.environ.get('OPENSHIFT_POSTGRESQL_DB_URL',
                    'sqlite:///{}'.format(os.path.abspath('../afcon.db'))
