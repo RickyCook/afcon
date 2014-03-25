@@ -9,7 +9,7 @@ class User(db.Model):
     """
     id = db.Column(db.Integer, primary_key=True)
 
-    email = db.Column(db.String(254), nullable=False)
+    email = db.Column(db.String(254), nullable=False, index=True, unique=True)
     password = db.Column(PasswordType(schemes=['pbkdf2_sha512']))
 
     nick_name = db.Column(db.String(100), nullable=False)
