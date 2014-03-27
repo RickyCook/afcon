@@ -15,6 +15,19 @@ USER_FIELDS = {
     'phone': fields.String,
 }
 
+def only_current_user(func):
+    """
+    Only allow access to the user specified by the email given as the first
+    argument after self
+    """
+    def decorated(self, email, *args, **kwargs):
+        if False:  # TODO make this a real user/session test
+            abort(403, "Current user forbidden")
+        return func(self, email, *args, **kwargs)
+
+    return decorated
+
+
 class Users(Resource):
     """
     User details resource, used for getting a specific user
@@ -55,6 +68,7 @@ class Users(Resource):
         return form.errors
 
     @marshal_with(USER_FIELDS)
+    @only_current_user
     def get(self, email):
         """
         List the user
@@ -62,6 +76,7 @@ class Users(Resource):
         return self._get_user(email)
 
     @marshal_with(USER_FIELDS)
+    @only_current_user
     def post(self, email):
         """
         Edit an existing user
