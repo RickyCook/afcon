@@ -5,6 +5,12 @@ from flask.testing import FlaskClient
 
 from afcon import app
 
+
+RETURN_CODE = {
+    403: '403 UNAUTHORIZED',
+    405: '405 METHOD NOT ALLOWED',
+}
+
 def requires_database(func):
     """
     Decorator to skip tests that require a database
@@ -17,6 +23,7 @@ def requires_database(func):
         return func(*args, **kwargs)
 
     return decorated
+
 
 class FlaskTestMixin(object):
     """
