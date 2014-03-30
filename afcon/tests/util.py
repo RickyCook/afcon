@@ -1,15 +1,8 @@
 import unittest
 from unittest.case import SkipTest
 
-from flask.testing import FlaskClient
-
 from afcon import app
 
-
-RETURN_CODE = {
-    403: '403 UNAUTHORIZED',
-    405: '405 METHOD NOT ALLOWED',
-}
 
 def requires_database(func):
     """
@@ -30,4 +23,5 @@ class FlaskTestMixin(object):
     Base test case for Flask tests
     """
     def setUp(self):
-        self.client = FlaskClient(app)
+        app.config['TESTING'] = True
+        self.client = app.test_client()

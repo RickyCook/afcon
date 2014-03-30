@@ -2,7 +2,7 @@ import unittest
 
 from flask import testing
 
-from afcon.tests.util import FlaskTestMixin, RETURN_CODE, requires_database
+from afcon.tests.util import FlaskTestMixin, requires_database
 
 
 class TestGetUser(FlaskTestMixin, unittest.TestCase):
@@ -26,7 +26,7 @@ class TestGetUser(FlaskTestMixin, unittest.TestCase):
         """
         # TODO Setup the user mail@pand.as
         res = self.client.get('/users/mail@pand.as')
-        self.assertEqual(res[1], RETURN_CODE[403])
+        self.assertEqual(res.status_code, 403)
 
     @requires_database
     def test_user_unauth(self):
@@ -37,7 +37,7 @@ class TestGetUser(FlaskTestMixin, unittest.TestCase):
         # TODO Setup the user mail@dog.es
         # TODO Login as user mail@pand.as
         res = self.client.get('/users/mail@dog.es')
-        self.assertEqual(res[1], RETURN_CODE[403])
+        self.assertEqual(res.status_code, 403)
 
     @requires_database
     def test_no_user(self):
@@ -45,7 +45,7 @@ class TestGetUser(FlaskTestMixin, unittest.TestCase):
         Make sure that we DON'T 404, which leaks info
         """
         res = self.client.get('/users/no@such.user')
-        self.assertEqual(res[1], RETURN_CODE[403])
+        self.assertEqual(res.status_code, 403)
 
 
 class TestUserList(FlaskTestMixin, unittest.TestCase):
@@ -57,4 +57,4 @@ class TestUserList(FlaskTestMixin, unittest.TestCase):
         Listing of users should give a 405
         """
         res = self.client.get('/users/')
-        self.assertEqual(res[1], RETURN_CODE[405])
+        self.assertEqual(res.status_code, 405)
