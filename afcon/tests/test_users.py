@@ -48,6 +48,26 @@ class TestGetUser(FlaskTestMixin, unittest.TestCase):
         self.assertEqual(res.status_code, 403)
 
 
+class TestCreateUser(FlaskTestMixin, unittest.TestCase):
+    """
+    Test user creation
+    """
+    BASE_FORM_DATA = {
+        'email': 'mail@pand.as',
+        'nick_name': 'Pandog',
+        'password': 'excellentpassword',
+        'phone': '0000000000',
+        'real_name': 'A. Panda',
+    }
+
+    @requires_database
+    def test_correct(self):
+        """
+        Make sure user creation works without a hitch
+        """
+        res 
+
+
 class TestUserList(FlaskTestMixin, unittest.TestCase):
     """
     Test the misc functions of the UsersList resource
